@@ -1,0 +1,983 @@
+Проектирование человеко-машинных
+интерфейсов
+
+Лекция 15. Основные подходы к организации
+пользовательского интерфейса мобильных и вебприложений
+М.И. Давидовская
+
+Проектирование веб-интерфейсов
+
+Препроцессоры CSS
+
+Препроцессоры
+ Препроцессоры html:
+
+
+Haml
+
+
+
+Jade
+
+ Препроцессоры CSS
+
+
+Less
+
+
+
+Sass (SCSS)
+
+
+
+Stylus
+
+
+
+Closure Stylesheets
+
+
+
+CSS Crush
+
+ Препроцессоры JavaScript:
+
+
+CoffeScript (Javascript)
+
+Haml: установка
+ Haml требует Ruby для компиляции в HTML.
+ Установка Haml:
+
+$ gem install haml
+ Компиляция в html:
+
+$ haml index.haml index.html
+
+Haml: определение типа документа
+
+Haml: объявление элементов
+
+Препроцессор Jade
+
+ https://jade-lang.com
+
+CoffeScript
+ CoffeScript — язык, который
+
+компилируется в Javascript.
+ http://coffeescript.org/#overview
+###
+Синтаксис Coffescript
+###
+mood = greatlyImproved if singing
+if happy and knowsIt
+clapsHands()
+chaChaCha()
+else
+showIt()
+date = if friday then sue else jill
+
+/*
+Синтаксис Javascript
+*/
+var date, mood;
+if (singing) {
+mood = greatlyImproved;
+}
+if (happy && knowsIt) {
+clapsHands();
+chaChaCha();
+} else {
+showIt();
+}
+date = friday ? sue : jill;
+
+CSS-препроцессор
+CSS препроцессор (CSS preprocessor) — это метаязык (надстройка
+над CSS), программа, которая на вход принимает данные и выдает
+данные для входа другой программы.
+
+Основные возможности
+Основные возможности и преимущества CSS-препроцессоров:
+1. Родительский селектор
+1.1. Вложенный селектор
+1.2. Вложенный селектор
+ Простота использования
+1.2.1. Вложенный селектор
+ Структура и логичность кода, включая вложенные правила
+1.3. Вложенный селектор
+
+
+
+Документация
+
+
+
+Переменные
+
+
+
+Примеси (Миксины) — набор свойств и селекторов, расширяющий
+поведение другой сущности (селектора) или шаблоны с готовым CSSкодом, легко подставляемые к любому из элементов сайта или
+приложения. Достаточно вписать их название в блок оформления
+селектора. Миксины отчасти похожи на функции, так как умеют
+принимать аргументы при использовании.
+
+
+
+Предопределенные функции
+
+
+
+Операторы, импортирование файлов, сообщения об ошибках
+
+Основные CSS-препроцессоры
+ LESS — метаязык / CSS-препроцессор LESS разработал Alexis
+
+Sellier. Первая версия языка LESS появилось в 2009 году.
+ SASS (SCSS) — первая версия препроцессора SASS появилась
+
+в 2007 году. SASS написан на языке Ruby и он имеет два
+синтаксиса — старый и новый. Возможности SASS можно
+расширять с помощью библиотеки Compass.
+ Stylus — первая версия препроцессора Stylus появилось в 2010
+
+году. CSS-препроцессор Stylus написан на языке
+программирования JavaScript. Он поддерживает несколько
+вариантов написание кода (синтаксиса).
+https://webref.ru/layout/advanced-html-css/preprocessors
+
+Синтаксис LESS: переменные
+#header {
+background-color: #CCCCCC
+}
+.aside {
+background-color: #CCCCCC;
+color: #000000;
+.sidebar a {
+border-bottom: 1px solid #CCCCCC;
+}
+@grey: #CCCCCC;
+#header {
+background-color: @grey;
+}
+.aside {
+background-color: @grey;
+color: #000000;
+}
+.sidebar a {
+border-bottom: 1px solid @grey;
+}
+
+Синтаксис LESS: примеси
+.border_top_bottom {
+border-top: dotted 1px #000;
+border-bottom: solid 2px #000;
+}
+#header {
+color: #000000;
+.border_top_bottom;
+}
+.content a {
+color: #000000;
+.border_top_bottom;
+}
+#header {
+color: #000000;
+border-top: dotted 1px #000000;
+border-bottom: solid 2px #000000;
+}
+.content a {
+color: #000000;
+border-top: dotted 1px #000000;
+border-bottom: solid 2px #000000;
+}
+
+Синтаксис LESS: примеси
+
+.border-radius (@radius: 5px) {
+border-radius: @radius;
+-moz-border-radius: @radius;
+-webkit-border-radius: @radius;
+}
+.button {
+}
+
+.border-radius(6px);
+
+Синтаксис LESS: вложения
+nav { }
+nav li { }
+nav li a { }
+nav li a:hover { }
+nav li a.active { }
+nav li a.visited { }
+nav {
+li {
+
+}
+
+}
+
+a{
+
+}
+
+&amp;:hover { }
+&amp;:active { }
+&amp;:visited { }
+
+Синтаксис LESS: операции
+@padding: 5px;
+h1 {
+padding: @padding;
+}
+h1.page-title {
+padding: (@padding * 2);
+}
+// numbers are converted into the same units
+@conversion-1: 5cm + 10mm; // result is 6cm
+@conversion-2: 2 - 3cm - 5mm; // result is -1.5cm
+// conversion is impossible
+@incompatible-units: 2 + 5px - 3cm; // result is 4px
+// example with variables
+@base: 5%;
+@filler: @base * 2; // result is 10%
+@other: @base + @filler; // result is 15%
+@color: #224488 / 2; //results in #112244
+background-color: #112244 + #111; // result is #223355
+
+Синтаксис LESS: функции
+@base: #f04615;
+@width: 0.5;
+.class {
+width: percentage(@width); // returns `50%`
+color: saturate(@base, 5%);
+background-color: spin(lighten(@base, 25%), 8);
+}
+
+Встроенные функции:
+ Общие функции (color, image-size, image-width, image-height, convert, data-url,...)
+ Строковые функции
+ Функции для работы со списками
+ Математические функции
+ Функции для работы с типами
+ Функции для работы с цветовой палитрой
+ Функции цветового канала
+ Функции смешивания цвета
+https://less-lang.info/functions/
+
+Синтаксис LESS: область видимости
+@var: red;
+#page {
+@var: white;
+#header {
+color: @var; // выведет white
+}
+}
+#footer {
+color: @var; // выведет red
+}
+
+Синтаксис Sass / SCSS
+
+Синтаксис Sass: вложения
+
+Синтаксис Sass: вложенные свойства
+
+Синтаксис Sass: вложенные media-запросы
+
+Синтаксис Sass: родительский селектор
+
+Синтаксис Sass: переменные
+
+Синтаксис Sass: вычисления
+
+Синтаксис Sass: числовые функции
+
+Синтаксис Sass: цвет
+
+Синтаксис Sass: цвет
+
+Синтаксис Sass: расширения
+
+
+Расширения предоставляют
+возможность легко обмениваться и
+повторно использовать стили без
+явного повторения кода или
+включать дополнительные классы,
+предлагая идеальный способ
+сохранить модульность кода.
+ Элементы и классы могут быть
+использованы в качестве
+расширения, также есть селекторзаполнитель, построенный
+специально для расширений.
+ Расширения устанавливаются с
+помощью правила @extend, за
+которым следует селектор для
+расширения.
+ Применяются с OOCSS и
+SMACSS.
+
+Синтаксис Sass: примеси
+
+
+
+
+
+Примеси предлагают простой способ создания шаблонов свойств и значений, а
+затем обмениваться ими между разными селекторами.
+Примеси отличаются от расширений аргументами.
+Примеси определяются с помощью правила @mixin, за которым следуют любые
+возможные аргументы, затем идут любые правила стилей.
+Вместо знака плюс для вызова примеси SCSS использует правило @include.
+
+Синтаксис Sass: импорт
+ Позволяет импортировать несколько файлов .scss или .sass и
+
+сжимать их в один файл.
+ В примере все три файла normalize.sass, _grid.sass и
+
+typography.sass компилируются в один файл.
+
+Синтаксис Sass: циклы и условные выражения
+
+Конвертация Sass / SCSS
+
+# Конвертируем Sass в SCSS
+sass-convert styles.sass styles.scss
+# Конвертируем SCSS в Sass
+sass-convert styles.scss styles.sass
+
+https://webref.ru/layout/advanced-html-css/preprocessors
+https://sass-scss.ru/documentation/
+
+Выводы
+
+CSS-постпроцессоры
+Постпроцессоры — это инструмент, работающий схожим образом с
+препроцессорами в том плане, что постпроцессоры влияют на
+процесс разработки.
+Работают данные инструменты с другой стороной CSS разработки.
+
+Препроцессоры vs Постпроцессоры
+Чтобы построить свой рабочий процесс по пре- или постпроцессингу,
+сначала создать список проблем:
+ автоматическое добавление префиксов в CSS градиентах;
+ автоматическая организация CSS-правил;
+ вставка полифилов (код, реализующий какой-либо функционал,
+
+который не поддерживается в некоторых версиях веб-браузеров
+по умолчанию) для отдельных свойств;
+ генерация размеров изображений для фона;
+ другое.
+
+CSS-постпроцессоры
+ PostCSS
+ Pleeease
+ Bless
+ CSSNext
+ Stylecow
+ -prefix-free
+
+CSS-постпроцессоры
+PostCSS:
+ это не препроцессор стилей, как Sass или Less
+Он не определяет пользовательский синтаксис и семантику, фактически это
+не язык. PostCSS работает с CSS и может быть легко интегрирован с
+описанными выше инструментами. При этом любой допустимый CSS может
+быть обработан с помощью PostCSS.
+ это инструмент для преобразования синтаксиса CSS
+Позволяет определять пользовательский синтаксис, подобный CSS,
+который может быть понятен и преобразован с помощью модулей
+(расширений). При этом PostCSS относится не только к спецификации CSS,
+но и к способу определения синтаксиса CSS. Позволяет определить
+пользовательские синтаксические конструкции, такие как @правило (atrule).
+ является важным инструментом в экосистеме CSS
+Большое количество инструментов, таких как Autoprefixer, Stylelint,
+CSSnano, были созданы на основе экосистемы PostCSS.
+
+CSS-постпроцессоры
+ В основе PostCSS лежит подход AST-преобразования (AST —
+
+Abstract Syntax Tree):
+
+CSS-постпроцессоры
+
+
+Процесс работы PostCSS состоит
+из этапов синтаксического анализа
+(парсинга)
+исходная строка → токены →
+AST
+
+
+
+Ядро PostCSS:
+
+
+
+
+
+
+
+Tokenizer lib/tokenize.js — разбиение
+кода на токены.
+Parser lib/parse.js, lib/parser.js —
+синтаксический анализ,
+обеспечивающий построение ASTдерева.
+Processor lib/processor.js —
+инициализация модулей и выполение
+преобразований.
+Stringifier lib/stringify.js, lib/stringifier.js
+— преобразование AST-дерева в код
+CSS.
+
+CSS-постпроцессоры
+Перечень основных плагинов в
+экосистеме PostCSS:
+
+
+Autoprefixer добавляет
+браузерные префиксы к
+правилам css:
+
+//in.css
+div {
+display: flex
+}
+//out.css
+div {
+display: -webkit-box;
+display: -webkit-flex;
+display: -moz-box;
+display: -ms-flexbox;
+display: flex
+}
+
+ Preset Env добавляет
+
+возможности, которые только
+обсуждаются в черновиках
+разработчиков css, например
+@custom-media:
+
+//in.css
+@custom-media --med (width <= 50rem);
+@media (--med) {
+a:hover {
+color: color-mod(black alpha(54%));
+}
+}
+//out.css
+@media (max-width: 50rem) {
+a:hover {
+color: rgba(0, 0, 0, 0.54);
+}
+}
+
+CSS-постпроцессоры
+ CSS Modules изменяет
+
+названия классов по
+некоторому шаблону:
+//in.css
+.name {
+color: gray;
+}
+//out.css
+.Logo__name__SVK0g {
+color: gray;
+}
+
+ PostCSS Short добавляет
+
+сокращенные записи для
+различных правил:
+//in.css
+.icon {
+size: 48px;
+}
+.canvas {
+color: #abccfc #212231;
+}
+//out.css
+.icon {
+width: 48px;
+height: 48px;
+}
+.canvas {
+color: #abccfc;
+background-color: #212231;
+}
+
+CSS-постпроцессоры
+
+
+PostCSS Auto Reset позволяет
+нам не создавать отдельный файл
+со сбросом всех стилей. Плагин
+создает для всех селекторов один
+большой селектор, куда помещает
+правила, сбрасывающее все
+стили:
+
+/*Пример сброса стилей */
+//out.css
+div, a {
+margin: 0;
+padding: 0;
+
+
+
+SugarSS — синтаксический анализатор
+(парсер), который базируется на отступах, а
+не на фигурных скобках, как стандартный.
+Имеет отдельное расширение ".sss". Код
+написанный с помощью SugarSS по стилю
+схож со старым синтаксисом Sass:
+
+//in.sss
+.parent
+color: white
+.parent > .child
+color: black
+
+}
+div {
+margin: 10px;
+}
+
+//out.css
+.parent {
+color: white
+}
+
+a {
+color: blue;
+}
+
+https://postcss.org/docs/postcss-plugins
+
+.parent > .child {
+color: black
+}
+
+CSS-постпроцессоры
+
+Проектирование веб-интерфейсов
+
+Программные средства для веб-разработки
+(Веб-фреймворки)
+
+Программное средство для проектирования веб-интерфейса
+Программное средство или фреймворк (framework) — программное
+обеспечение, облегчающее разработку и объединение разных компонентов
+большого программного проекта.
+Программное средство или фреймворк — это инструмент, который
+предоставляет общие функциональные возможности для различных проектов,
+имеет согласованный API и структуру именования, которые позволяют быстро
+запускать и выполнять задачи независимо от проекта.
+Программное средство для проектирования веб-интерфейса или вебфреймворк — это группа готовых веб-компонентов и моделей, которые
+облегчают веб-программирование и представляют его более организованным.
+ Программные средства для разработки веб-интерфейса (css-фреймворки и
+js-фреймворки) — клиентская часть (frontend).
+ Программные средства для реализации логики фреймворк — серверная
+часть (backend).
+
+Программное средство для проектирования веб-интерфейса
+Классификация по уровню абстракции:
+ Основанные на запросах: программное средство (фреймворк)
+непосредственно обрабатывает входящие запросы. Сохранение состояния
+происходит за счёт серверных сессий. Примеры: Django, Ruby on Rails,
+Struts, Grails.
+ Основанные на компонентах: программное средство (фреймворк)
+абстрагирует обработку запросов внутри стандартных компонентов и
+самостоятельно следит за состоянием. Своим поведением данные
+фреймворки напоминают стандартные программные графические
+интерфейсы. Примеры: JavaServer Faces, Tapestry, Wicket.
+ Rich Internet Application-фреймворк: служат для разработки полноценных
+приложений, запускаемых внутри браузера. Пример: Apache Flex.
+ Проектирование веб-интерфейса: программные средства для реализации
+элементов пользовательского интерфейса из готовых компонентов,
+реализованных с помощью html, css, javascript.
+
+Программное средство для проектирования веб-интерфейса
+ По типу архитектуры:
+
+
+
+
+MVC-шаблон:
+
+
+Push-based (action-based): Django, Ruby on Rails, Symfony, Spring MVC, Stripes,
+Sails.js, CodeIgniter
+
+
+
+Pull-based (component-based): Lift, Tapestry, JBoss Seam, Jakarta Server Faces
+
+Трехуровневая организация: клиент, приложение и база данных.
+
+Программное средство CSS
+Программное средство CSS или CSS-фреймворк — набор технологий,
+включающий в себя усовершенствованный синтаксис CSS, дополнительные
+функции, а также ряд шаблонов для быстрой развертки сайта без
+необходимости все элементы стиля прописывать самостоятельно.
+Создан для упрощения работы верстальщика, быстроты разработки и
+исключения максимально возможного числа ошибок вёрстки.
+CSS-фреймворк представляет собой пакет, состоящий из компонентов HTML,
+CSS и JS, которые можно использовать при создании веб-проекта.
+Типы:
+
+
+Всеобъемлющие CSS-библиотеки (Bootstrap, Foundation, Blueprint и др.)
+
+
+
+Ограниченные CSS-библиотеки (jQuery UI CSS Framework)
+
+Программное средство CSS
+Программные средства отличаются друг от друга и имеют разные
+подходы, но у них общие цели:
+ Ускорить процесс разработки, за счет уничтожения привычных
+
+для CSS сложностей с визуальным оформлением страниц.
+ Добавить в сайт или приложение кроссбраузерность.
+ Вынудить команду разработчиков следовать определенным
+
+правилам дизайна.
+ Корректно выровнять все элементы на странице.
+ Сделать подключаемые к приложению стили более удобными с
+
+точки зрения поддержки.
+
+Программное средство CSS
+Компоненты css-фреймворка:
+
+
+HTML-код, который помогает создать структуру страницы;
+
+
+
+Стили типографики;
+
+
+
+CSS для визуального изменения элементов (стандартный набор
+простых в использовании классов);
+
+
+
+JavaScript для изменения динамических элементов, таких как
+выпадающие меню и т. д.;
+
+
+
+Адаптивные медиазапросы (@media);
+
+
+
+Исправления ошибок кроссбраузерной совместимости.
+
+Программное средство CSS
+ Boostrap — https://getbootstrap.com
+ Foundation — https://get.foundation
+ Pure CSS — https://purecss.io/ (создан Yahoo в 2014)
+ Bulma — https://bulma.io/
+ Semantic UI — https://semantic-ui.com/
+ Materialize CSS — https://materializecss.com/
+ … другие
+
+Bootstrap
+https://getbootstrap.com
+Bootstrap (Twitter
+Blueprint) был
+создан Марком
+Отто и Якобом
+Торнтоном и
+выпущен 19 августа
+2011 года.
+
+Bootstrap
+ Сетки
+
+
+
+Bootstrap — это бесплатное
+программное средство
+(фреймворк) для разработки
+интерфейсов, изначально
+созданный разработчиком из
+Twitter и с тех пор ставший одним
+из самых популярных
+фреймворков для мобильных
+устройств и веб-интерфейсов.
+
+
+
+Bootstrap использует HTML5 в
+качестве средства для создания
+контента.
+
+
+
+Bootstrap добавляет большое
+количество CSS-классов,
+которые могут быть назначены
+этим элементам.
+
+ Шаблоны
+ Типографика
+ Медиа
+ Таблицы
+ Формы
+ Навигация
+ Всплывающее компоненты
+
+Bootstrap
+
+
+Bootstrap поддерживает три ключевые версии:
+
+
+
+
+Bootstrap 3 рекомендуется использовать, если требуется поддержка браузера Internet
+Exploter 8 и 9 версии.
+Bootstrap 4 и предыдущие версии использует jQuery. Поддерживает браузер Internet
+Explorer 10 и 11 версии.
+Bootstrap 5 использует только Javacript.
+
+https://habr.com/ru/company/selectel/blog/555930/
+
+Bootstrap
+
+http://www.webmasters.by/articles/html-coding/3493-bootstrap-4-regular-grid-vs-flexbox-grid.html
+https://blog.templatetoaster.com/bootstrap-3-vs-bootstrap-4-migrate-differences/
+
+Bootstrap
+
+Bootstrap
+bootstrap/
+├── css/
+│
+├── bootstrap-grid.css
+│
+├── bootstrap-grid.css.map
+│
+├── bootstrap-grid.min.css
+│
+├── bootstrap-grid.min.css.map
+│
+├── bootstrap-grid.rtl.css
+│
+├── bootstrap-grid.rtl.css.map
+│
+├── bootstrap-grid.rtl.min.css
+│
+├── bootstrap-grid.rtl.min.css.map
+│
+├── bootstrap-reboot.css
+│
+├── bootstrap-reboot.css.map
+│
+├── bootstrap-reboot.min.css
+│
+├── bootstrap-reboot.min.css.map
+│
+├── bootstrap-reboot.rtl.css
+│
+├── bootstrap-reboot.rtl.css.map
+│
+├── bootstrap-reboot.rtl.min.css
+│
+├── bootstrap-reboot.rtl.min.css.map
+│
+├── bootstrap-utilities.css
+│
+├── bootstrap-utilities.css.map
+│
+├── bootstrap-utilities.min.css
+│
+├── bootstrap-utilities.min.css.map
+│
+├── bootstrap-utilities.rtl.css
+│
+├── bootstrap-utilities.rtl.css.map
+│
+├── bootstrap-utilities.rtl.min.css
+│
+├── bootstrap-utilities.rtl.min.css.map
+│
+├── bootstrap.css
+│
+├── bootstrap.css.map
+│
+├── bootstrap.min.css
+│
+├── bootstrap.min.css.map
+│
+├── bootstrap.rtl.css
+│
+├── bootstrap.rtl.css.map
+│
+├── bootstrap.rtl.min.css
+│
+└── bootstrap.rtl.min.css.map
+└── js/
+├── bootstrap.bundle.js
+├── bootstrap.bundle.js.map
+├── bootstrap.bundle.min.js
+├── bootstrap.bundle.min.js.map
+├── bootstrap.esm.js
+├── bootstrap.esm.js.map
+├── bootstrap.esm.min.js
+├── bootstrap.esm.min.js.map
+├── bootstrap.js
+├── bootstrap.js.map
+├── bootstrap.min.js
+└── bootstrap.min.js.map
+
+ Структура скомпилированного
+
+пакета Bootstrap
+
+Bootstrap
+
+Bootstrap
+
+Bootstrap
+
+
+Пакет исходного кода Boostrap:
+bootstrap/
+├── dist/
+│
+├── css/
+│
+└── js/
+├── site/
+│
+└──content/
+│
+└── docs/
+│
+└── 5.3/
+│
+└── examples/
+├── js/
+└── scss/
+
+Bootstrap и препроцессоры
+
+Bootstrap
+
+
+Поддерживаемые браузера описаны в файле .browserslistrc:
+# https://github.com/browserslist/browserslist#readme
+>= 0.5%
+last 2 major versions
+not dead
+Chrome >= 60
+Firefox >= 60
+Firefox ESR
+iOS >= 12
+Safari >= 12
+not Explorer <= 11
+
+Bootstrap
+
+Bootstrap
+ Набор модулей (расширений) JavaScript, которые размещаются в
+
+каталоге js/dist/*.js, или все модули в одном файле
+bootstrap.js (bootstrap.min.js).
+ Bootstrap CSS может использоваться в любом другом
+
+программном средстве (фреймворке).
+ Bootstrap JavaScript не совместим полностью с рядом
+
+программных средств JavaScript, например React, Vue и Angular.
+
+
+Рекомендуется использовать специальный пакет Bootstrap для каждого из
+JS программных средств, например:
+
+
+React: React Bootstrap
+
+
+
+Vue: BootstrapVue (Bootstrap 4)
+
+
+
+Vue 3: BootstrapVueNext (Bootstrap 5, currently in alpha)
+
+
+
+Angular: ng-bootstrap
+
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+
+Foundation
+https://get.foundation
+Адаптивное программное
+средство (frontend
+фреймворк), созданный
+ZURB. Он имеет открытый
+исходный код. Foundation
+был выпущен в 2011 г. по
+лицензии MIT.
+
+Bootstrap vs Foundation
+
+Bootstrap vs Foundation
+
+Bootstrap vs Foundation
+Семантические классы:
+Bootstrap: .span1
+Foundation: .one.column
+
+Классы видимости для мобильных устройств
+Bootstrap:
+.visible-phone
+.visible-tablet
+.visible-desktop
+.hidden-phone
+.hidden-tablet
+.hidden-desktop
+
+Foundation:
+
+Основанные на размере экрана:
+.show-for-xlarge
+.show-for-large
+.show-for-large-up
+.show-for-medium
+.show-for-medium-down
+.show-for-small
+.hide-for-xlarge
+.hide-for-large
+.hide-for-large-up
+.hide-for-medium
+.hide-for-medium-down
+.hide-for-small
+
+Основанные на ориентации:
+.show-for-landscape
+.show-for-portrait
+Основанные на сенсорных
+возможностях:
+.show-for-touch
+.hide-for-touch
+Основанные на возможности
+печати:
+.print-only
+.hide-on-print
+
+

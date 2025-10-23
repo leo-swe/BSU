@@ -1,0 +1,36 @@
+reset;
+
+model farming.mod;
+data farming.dat;
+
+option solver cplex;
+
+solve;
+
+param sum_x;
+param game_value;
+
+let sum_x := sum{i in 1..m} x[i];
+let game_value := 1 / sum_x;
+
+printf "Сумма переменных x: %.6f\n", sum_x;
+printf "Цена игры (гарантированная прибыль): %.4f\n\n", game_value;
+
+printf "Оптимальная стратегия фермера:\n";
+printf "%-19s  %-9s  %-12s\n", "Культура", "x[i]", "Вероятность";
+for {i in 1..m} {
+    printf "Культура %d   %.6f   %.4f (%.2f%%)\n", 
+        i, x[i], game_value * x[i], game_value * x[i] * 100;
+}
+
+printf "\nЧистые стратегии:\n";
+param min_profit{i in 1..m};
+for {i in 1..m} {
+    let min_profit[i] := min{j in 1..n} A[i,j];
+    printf "Культура %d: мин прибыль = %.0f\n", i, min_profit[i];
+}
+
+param best_pure := max{i in 1..m} min_profit[i];
+printf "\nЛучшая чистая стратегия дает прибыль: %.0f\n", best_pure;
+printf "Выигрыш от смешанной стратегии: %.4f (на %.1f%% больше)\n",
+    game_value - best_pure, (game_value - best_pure) / best_pure * 100;

@@ -1,0 +1,23 @@
+
+reset;
+
+model assignment.mod;
+data assignment.dat;
+
+option solver cplex;  
+
+solve;
+
+printf "Минимальное общее время: %.0f часов\n\n", TotalTime;
+
+printf "Оптимальное распределение:\n";
+printf "%-10s %-10s %-10s\n", "Работник", "Задача", "Время";
+
+for {i in WORKERS, j in TASKS: x[i,j] > 0.5} {
+    printf "%-10s %-10s %-10.0f\n", i, j, time[i,j];
+}
+
+printf "\nРаботники без назначения:\n";
+for {i in WORKERS: sum{j in TASKS} x[i,j] < 0.5} {
+    printf "%s\n", i;
+}
